@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Starting Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1024px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 300px; /* Adjust this for mobile responsiveness */
+        }
+
+        a {
+            display: block;
+            margin-bottom: 10px;
+            color: blue;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Starting Experience</h1>
+        </header>
+        <div class="columns">
+            <div class="column">
+                <!-- Add your links here -->
+                <a href="https://news.ycombinator.com">Hacker News</a>
+                <a href="https://freefeed.net">FreeFeed</a>
+                <!-- More links -->
+            </div>
+            <div class="column">
+                <!-- Add your links here -->
+                <a href="https://mediagazer.com">Mediagazer</a>
+                <a href="https://techmeme.com">Techmeme</a>
+                <!-- More links -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
