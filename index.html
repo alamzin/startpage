@@ -4,48 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Starting Page</title>
-    <style>
+        <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             display: flex;
             justify-content: center;
+            background-color: #f4f4f4;
         }
 
         .container {
             max-width: 1024px;
             width: 100%;
             padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         header {
             text-align: center;
             padding: 20px 0;
+            background-color: #007bff;
+            color: white;
+            margin: -20px -20px 20px -20px;
         }
 
         .columns {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            text-align: center;
         }
 
         .column {
             flex: 1;
             min-width: 300px; /* Adjust this for mobile responsiveness */
+            background-color: #e7e7e7;
+            padding: 15px;
+            border-radius: 8px;
         }
 
         a {
             display: block;
             margin-bottom: 10px;
-            color: blue;
+            color: #007bff;
             text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 4px;
         }
 
         a:hover {
-            text-decoration: underline;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
         }
     </style>
 </head>
