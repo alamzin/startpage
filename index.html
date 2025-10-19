@@ -6,6 +6,7 @@
     <title>My Starting Page</title>
         <style>
         :root {
+            --page: #e6e6e6; /* outside background */
             --bg: #ffffff;
             --text: #000000;
             --surface: #ffffff;
@@ -16,6 +17,7 @@
         }
 
         html[data-theme="dark"] {
+            --page: #1e1e1e; /* outside background in dark for stronger contrast */
             --bg: #000000;
             --text: #ffffff;
             --surface: #000000;
@@ -23,6 +25,11 @@
             --link: #ffffff;
             --link-hover-bg: #ffffff;
             --link-hover-text: #000000;
+        }
+
+        /* Optional chestnut backdrop for a warmer newspaper desk look */
+        html[data-backdrop="chestnut"] {
+            --page: #7a5230; /* chestnut */
         }
 
         * { box-sizing: border-box; }
@@ -33,7 +40,7 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            background-color: var(--bg);
+            background-color: var(--page);
             color: var(--text);
         }
 
@@ -59,6 +66,15 @@
             color: var(--text);
             border-bottom: 2px solid var(--border);
             margin-bottom: 20px;
+        }
+
+        .datetime {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            color: var(--text);
+            background: transparent;
+            font-size: 0.9rem;
         }
 
         .theme-toggle {
@@ -93,7 +109,7 @@
             color: var(--link);
             text-decoration: underline;
             padding: 5px 10px;
-            transition: background-color 0.2s ease, color 0.2s ease;
+            transition: none;
         }
 
         a:hover {
@@ -106,6 +122,7 @@
 <body>
     <div class="container">
         <header>
+            <div id="datetime" class="datetime" aria-live="polite"></div>
             <h1>My Starting Experience</h1>
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
         </header>
@@ -178,6 +195,7 @@
             (function () {
                 const root = document.documentElement;
                 const btn = document.getElementById('theme-toggle');
+                const dtEl = document.getElementById('datetime');
 
                 function applyTheme(theme) {
                     if (theme === 'dark') {
@@ -199,6 +217,17 @@
                     localStorage.setItem('theme', next);
                     applyTheme(next);
                 });
+
+                function pad(n) { return String(n).padStart(2, '0'); }
+                function updateDateTime() {
+                    const d = new Date();
+                    const weekday = d.toLocaleDateString(undefined, { weekday: 'long' });
+                    const date = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+                    const time = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+                    dtEl.textContent = `${weekday}, ${date} ${time}`;
+                }
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
             })();
         </script>
     </div>
