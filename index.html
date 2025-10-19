@@ -5,22 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Starting Page</title>
         <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --surface: #ffffff;
+            --border: #000000;
+            --link: #000000;
+            --link-hover-bg: #000000;
+            --link-hover-text: #ffffff;
+        }
+
+        html[data-theme="dark"] {
+            --bg: #000000;
+            --text: #ffffff;
+            --surface: #000000;
+            --border: #ffffff;
+            --link: #ffffff;
+            --link-hover-bg: #ffffff;
+            --link-hover-text: #000000;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             display: flex;
             justify-content: center;
-            background-color: #f4f4f4;
+            background-color: var(--bg);
+            color: var(--text);
         }
 
         .container {
             max-width: 1200px;
             width: 100%;
             padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--surface);
+            border: 2px solid var(--border);
         }
 
         .subhead {
@@ -30,11 +52,24 @@
         }
 
         header {
+            position: relative;
             text-align: center;
             padding: 20px 0;
-            background-color: #007bff;
-            color: white;
-            margin: -20px -20px 20px -20px;
+            background-color: var(--surface);
+            color: var(--text);
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            cursor: pointer;
         }
 
         .columns {
@@ -47,24 +82,23 @@
         .column {
             flex: 1;
             min-width: 300px; /* Adjust this for mobile responsiveness */
-            background-color: #e7e7e7;
+            background-color: var(--surface);
             padding: 15px;
-            border-radius: 8px;
+            border: 1px solid var(--border);
         }
 
         a {
             display: block;
             margin-bottom: 10px;
-            color: #007bff;
-            text-decoration: none;
+            color: var(--link);
+            text-decoration: underline;
             padding: 5px 10px;
-            transition: background-color 0.3s, color 0.3s;
-            border-radius: 4px;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         a:hover {
-            background-color: #007bff;
-            color: white;
+            background-color: var(--link-hover-bg);
+            color: var(--link-hover-text);
             text-decoration: none;
         }
     </style>
@@ -73,6 +107,7 @@
     <div class="container">
         <header>
             <h1>My Starting Experience</h1>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
         </header>
         <div class="columns">
             <div class="column">
@@ -139,7 +174,33 @@
                 <a href="https://feedly.com/">Feedly</a>
             </div>
         </div>
-        
+        <script>
+            (function () {
+                const root = document.documentElement;
+                const btn = document.getElementById('theme-toggle');
+
+                function applyTheme(theme) {
+                    if (theme === 'dark') {
+                        root.setAttribute('data-theme', 'dark');
+                        btn.textContent = 'Light mode';
+                    } else {
+                        root.setAttribute('data-theme', 'light');
+                        btn.textContent = 'Dark mode';
+                    }
+                }
+
+                const stored = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const initial = stored || (prefersDark ? 'dark' : 'light');
+                applyTheme(initial);
+
+                btn.addEventListener('click', () => {
+                    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    localStorage.setItem('theme', next);
+                    applyTheme(next);
+                });
+            })();
+        </script>
     </div>
 </body>
 </html>
