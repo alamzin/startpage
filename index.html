@@ -12,6 +12,7 @@
             --surface: #ffffff;
             --border: #000000;
             --link: #000000;
+            --rare-link: #6a6a6a; /* gray for rarely used */
             --link-hover-bg: #000000;
             --link-hover-text: #ffffff;
         }
@@ -23,6 +24,7 @@
             --surface: #000000;
             --border: #ffffff;
             --link: #ffffff;
+            --rare-link: #b0b0b0; /* gray for rarely used */
             --link-hover-bg: #ffffff;
             --link-hover-text: #000000;
         }
@@ -112,10 +114,24 @@
             transition: none;
         }
 
+        /* Mark rarely used links with a subtle gray */
+        a.rare { color: var(--rare-link); }
+
         a:hover {
             background-color: var(--link-hover-bg);
             color: var(--link-hover-text);
             text-decoration: none;
+        }
+
+        /* Notes under rubrics (e.g., Bookmarklets) */
+        .note {
+            color: #666666;
+            font-size: 0.9rem;
+            margin: 6px 0 10px 0;
+        }
+
+        html[data-theme="dark"] .note {
+            color: #b0b0b0;
         }
     </style>
 </head>
@@ -131,18 +147,19 @@
                 <!-- Add your links here -->
                 <div class="subhead">Themedia Daily</div>
                 <a href="https://themedia.center">Themedia.center</a>
-                <a href="https://www.linkedin.com/company/reutersinstitute/posts/?feedView=all">Reuters Institute</a>
                 <a href="https://t.me/GReaderBot">G Reader bot</a>
                 <a href="https://mediagazer.com">Mediagazer</a>
                 <a href="https://news.ycombinator.com">Hacker News</a>
+                <a href="https://www.linkedin.com/company/reutersinstitute/posts/?feedView=all">Reuters Institute</a>
                 <!-- More links -->
             </div>
             <div class="column">
                 <div class="subhead">News (misc)</div>
                 <a href="https://meduza.io">Meduza</a>
+                <a href="https://trends.google.com/trending?geo=RU">Google Trends: Russia, 24hrs</a>
                 <a href="https://techmeme.com">Techmeme</a>
                 <a href="https://alltop.com/">Alltop</a>
-                <a href="https://pinboard.in/popular/">Pinboard Popular</a>
+                <a class="rare" href="https://pinboard.in/popular/">Pinboard Popular</a>
                 <!-- More links -->
             </div>
             <div class="column">
@@ -150,7 +167,7 @@
                 <div class="subhead">Productivity</div>
                 <a href="https://drive.google.com">Google Drive</a>
                 <a href="https://fastmail.com">Fastmail</a>                
-                <a href="https://workflowy.com/">Workflowy</a>
+                <a class="rare" href="https://workflowy.com/">Workflowy</a>
                 <!-- More links -->
             </div>
         </div>
@@ -163,8 +180,8 @@
                 <a href="https://facebook.com">Facebook</a>
                 <a href="https://freefeed.net">FreeFeed</a>
                 <a href="https://mastodon.social/@amzin">Mastodon</a>
-                <a href="https://bsky.app/">Bluesky</a>
-                <a href="https://diasp.org/">Diasporg</a>
+                <a class="rare" href="https://bsky.app/">Bluesky</a>
+                <a class="rare" href="https://diasp.org/">Diasporg</a>
                 <!-- More links -->
             </div>
             <div class="column">
@@ -172,8 +189,9 @@
                 <a href="https://chat.openai.com/">ChatGPT</a>
                 <a href="https://todorant.com/">Todorant</a>
                 <a href="https://github.com/alamzin/startpage/">Startpage Github</a>
-                <a href="https://todoist.com/app/today">Todoist</a>
-                <a href="https://ticktick.com/webapp/#q/today/tasks">TickTick</a>
+                <a href="https://wordstat.yandex.com/">Yandex Wordstat</a>
+                <a class="rare" href="https://todoist.com/app/today">Todoist</a>
+                <a class="rare" href="https://ticktick.com/webapp/#q/today/tasks">TickTick</a>
             </div>
             <div class="column">
                 <div class="subhead">Reading</div>
@@ -186,12 +204,13 @@
                 <a href="https://stratechery.com/">Stratechery</a>
                 <a href="https://www.themarginalian.org/">The Marginalian</a>
                 <a href="https://daringfireball.net/">Daring Fireball</a>
-                <a href="https://feedly.com/">Feedly</a>
+                <a class="rare" href="https://feedly.com/">Feedly</a>
             </div>
         </div>
         <div class="columns">
             <div class="column">
                 <div class="subhead">Monitoring</div>
+                <a href="https://pulse.nrtk.app/ru">NRTK Pulse: Russia</a>
                 <a href="https://downforeveryoneorjustme.com/">Down for Everyone or Just Me</a>
                 <a href="https://www.isitdownrightnow.com/">Is It Down Right Now?</a>
                 <a href="https://www.uptrends.com/tools/uptime">Uptrends Uptime Tool</a>
@@ -200,7 +219,7 @@
 
             <div class="column">
                 <div class="subhead">Bookmarklets</div>
-                <div>Drag them to bookmarks bar</div>
+                <div class="note">Drag them to bookmarks bar</div>
                 <a title="translates a page to English" href="javascript:var t=((window.getSelection&&window.getSelection())||(document.getSelection&&document.getSelection())||(document.selection&&document.selection.createRange&&document.selection.createRange().text));var e=(document.charset||document.characterSet);if(t!=''){location.href='http://translate.google.com/?text=%27+t+%27&hl=en&langpair=auto|en&tbb=1&ie=%27+e;}else{location.href=%27http://translate.google.com/translate?u=%27+escape(location.href)+%27&hl=en&langpair=auto|en&tbb=1&ie=%27+e;};">page2eng</a>
                 <a  title="opens paywalled URL" href="javascript:window.location.href='https://archive.ph/newest/'+window.location.href.split('?')[0];">openpls</a>
             </div>
