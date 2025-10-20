@@ -80,13 +80,66 @@
         }
 
         .theme-toggle {
-            position: absolute;
-            right: 16px;
-            top: 16px;
             background: var(--surface);
             color: var(--text);
             border: 1px solid var(--border);
             padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .help-button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-weight: bold;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-actions .theme-toggle,
+        .header-actions .help-button {
+            position: static;
+        }
+
+        .help-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .help-overlay.hidden { display: none; }
+
+        .help-modal {
+            background: var(--surface);
+            color: var(--text);
+            border: 2px solid var(--border);
+            max-width: 560px;
+            width: 92%;
+            padding: 16px 18px;
+        }
+        .help-modal h2 { margin: 0 0 8px 0; font-size: 1.2rem; }
+        .help-modal p { margin: 8px 0 12px 0; }
+        .help-actions { text-align: right; margin-top: 12px; }
+        .help-close {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
             cursor: pointer;
         }
 
@@ -140,7 +193,10 @@
         <header>
             <div id="datetime" class="datetime" aria-live="polite"></div>
             <h1>My Starting Experience</h1>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
+                <button id="help-toggle" class="help-button" aria-label="Open help">?</button>
+            </div>
         </header>
         <div class="columns">
             <div class="column">
@@ -169,6 +225,22 @@
                 <a href="https://fastmail.com">Fastmail</a>                
                 <a class="rare" href="https://workflowy.com/">Workflowy</a>
                 <!-- More links -->
+            </div>
+        </div>
+        
+        <!-- Help / Tips Modal -->
+        <div id="help" class="help-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="help-title">
+            <div class="help-modal">
+                <h2 id="help-title">Welcome!</h2>
+                <p>Some tips while you're here:</p>
+                <ul>
+                    <li>I rarely use links painted gray. Maybe they're not so useful at all</li>
+                    <li>Pay attention to bookmarklets. Hover mouse cursor to read what they do</li>
+                    <li>This startpage can be forked on Github, the link is in the Tools category</li>
+                </ul>
+                <div class="help-actions">
+                    <button id="help-close" class="help-close" aria-label="Close help">Got it</button>
+                </div>
             </div>
         </div>
         <div class="columns">
@@ -237,6 +309,9 @@
                 const root = document.documentElement;
                 const btn = document.getElementById('theme-toggle');
                 const dtEl = document.getElementById('datetime');
+                const helpBtn = document.getElementById('help-toggle');
+                const helpOverlay = document.getElementById('help');
+                const helpClose = document.getElementById('help-close');
 
                 function applyTheme(theme) {
                     if (theme === 'dark') {
@@ -269,6 +344,21 @@
                 }
                 updateDateTime();
                 setInterval(updateDateTime, 1000);
+
+                function openHelp() {
+                    helpOverlay.classList.remove('hidden');
+                }
+                function closeHelp() {
+                    helpOverlay.classList.add('hidden');
+                }
+                helpBtn.addEventListener('click', openHelp);
+                helpClose.addEventListener('click', closeHelp);
+                helpOverlay.addEventListener('click', (e) => {
+                    if (e.target === helpOverlay) closeHelp();
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') closeHelp();
+                });
             })();
         </script>
     </div>
