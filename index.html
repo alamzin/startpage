@@ -305,7 +305,7 @@
                 <a title="translates a page to English" href="javascript:var t=((window.getSelection&&window.getSelection())||(document.getSelection&&document.getSelection())||(document.selection&&document.selection.createRange&&document.selection.createRange().text));var e=(document.charset||document.characterSet);if(t!=''){location.href='http://translate.google.com/?text=%27+t+%27&hl=en&langpair=auto|en&tbb=1&ie=%27+e;}else{location.href=%27http://translate.google.com/translate?u=%27+escape(location.href)+%27&hl=en&langpair=auto|en&tbb=1&ie=%27+e;};">page2eng</a>
                 <a  title="opens a paywalled URL" href="javascript:window.location.href='https://archive.ph/newest/'+window.location.href.split('?')[0];">openpls</a>
                 <a title="shows meta keywords and youtube video tags" href="javascript:(function(){var meta = document.querySelector('meta[name=\'keywords\']');if (meta && meta.content) {alert('YT TAGS: ' + meta.content);  } else {alert('No tags found.');}})();">kwrds</a>
-
+                <a title="scroll to pub" href="javascript:(()=>{const el=[...document.querySelectorAll('h5')].find(e=>e.textContent.trim()==='%D0%9E%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD%D0%BE');if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='3px solid red';setTimeout(()=>el.style.outline='',2000)}else{alert('h5 %E2%80%9C%D0%9E%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%BE%D0%B2%D0%B0%D0%BD%D0%BE%E2%80%9D not found')}})();">topub</a>
             </div>
 
             <div class="column">
